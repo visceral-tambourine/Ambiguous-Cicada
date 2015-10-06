@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/visceral-tambourine/Ambiguous-Cicada.png?label=ready&title=Ready)](https://waffle.io/visceral-tambourine/Ambiguous-Cicada)
 [![Stories in Ready](https://badge.waffle.io/Ambiguous-Cicada/Ambiguous-Cicada.png?label=ready&title=Ready)](https://waffle.io/Ambiguous-Cicada/Ambiguous-Cicada)
 
 # Kwiki
