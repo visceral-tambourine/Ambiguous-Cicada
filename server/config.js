@@ -4,7 +4,7 @@ var config = {
     dbpath: 'mongodb://localhost/kwikidev',
     port: 3000,
     api_keys: {
-      geocoding: process.env.APIKEY_GEOCODING,
+      geocoding: process.env.APIKEY_GEOCODING || AIzaSyBZGjKmctGCiNwuYFEbSa9tr-y8Ot_E6FY,
     }
   },
 
