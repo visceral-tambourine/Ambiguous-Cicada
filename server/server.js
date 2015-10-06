@@ -8,7 +8,9 @@ var session = require('express-session');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-server.listen(require('./config.js').port);
+server.listen(config.port, function () {
+  console.log('Listening on: ', config.port);
+});
 
 // Internal Dependencies
 var auth = require('./auth/auth');
