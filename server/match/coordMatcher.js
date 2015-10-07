@@ -88,11 +88,11 @@ coordMatcher.prototype._getDistance = function(coordsA, coordsB) {
     return degrees * Math.PI / 180;
   };
 
-  var dLat = toRad(coordsB.lat - coordsA.lat);
-  var dLng = toRad(coordsB.lng - coordsA.lng);
+  var dLat = toRad(coordsB.latitude - coordsA.latitude);
+  var dLng = toRad(coordsB.longitude - coordsA.longitude);
 
   var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-          Math.cos(toRad(coordsA.lat)) * Math.cos(toRad(coordsB.lat)) *
+          Math.cos(toRad(coordsA.latitude)) * Math.cos(toRad(coordsB.latitude)) *
           Math.sin(dLng/2) * Math.sin(dLng/2);
   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
   var dist = R * c;
