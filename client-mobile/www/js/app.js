@@ -77,6 +77,12 @@ angular.module('kwiki', [
     controller: 'MatchCtrl'
   })
 
+  .state('location-load', {
+    url: '/location-load',
+    templateUrl: 'templates/location-load.html',
+    controller: 'MatchCtrl'
+  })
+
   .state('chat', {
     url: '/chat',
     templateUrl: 'templates/chat.html',
