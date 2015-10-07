@@ -34,7 +34,10 @@ angular.module('kwiki.match', [])
     $scope.getLocation = function() {
       if ('geolocation' in $window.navigator) {
         $window.navigator.geolocation.getCurrentPosition(function(position) {
-          $rootScope.user.location = position.coords.latitude + ',' + position.coords.longitude;
+          $rootScope.user.location = [position.coords.latitude + ',' + position.coords.longitude, {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          }];
           MatchFactory.postMatch();
           console.log('YOU ARE HERE: ', $rootScope.user.location);
         });
