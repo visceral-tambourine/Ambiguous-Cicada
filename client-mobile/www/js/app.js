@@ -10,7 +10,8 @@ angular.module('kwiki', [
   'kwiki.auth',
   'kwiki.match',
   'kwiki.socket',
-  'kwiki.chat'
+  'kwiki.chat',
+  'kwiki.restaurant'
 ])
 
 .run(function($ionicPlatform, $rootScope) {
@@ -82,6 +83,12 @@ angular.module('kwiki', [
     templateUrl: 'templates/location-load.html',
     controller: 'MatchCtrl'
   })
+
+  .state('restaurant', {
+    url: '/restaurant',
+    templateUrl: 'templates/restaurant.html',
+    controller: 'RestaurantCtrl'
+  })  
 
   .state('chat', {
     url: '/chat',

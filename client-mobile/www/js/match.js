@@ -1,9 +1,5 @@
 angular.module('kwiki.match', [])
 
-
-//this will be where user picks the restaurant instead
-
-// new restaurant logic
                                          
 .factory('MatchFactory', ['$state', 'SocketFactory', '$window', '$rootScope', 
   function ($state, SocketFactory, $window, $rootScope) {
@@ -14,13 +10,17 @@ angular.module('kwiki.match', [])
   };
 
     matchFact.postMatch = function () {
-      this.socket.emit('matching', $rootScope.user);
-      this.socket.on('matched', function (data) {
-        $rootScope.chatRoomId = data;
-        $rootScope.$apply(function () {
-          $state.go('chat');
-        });
+      // $rootScope.restaurantData = data;
+      $rootScope.$apply(function () {
+        $state.go('restaurant');
       });
+      // this.socket.emit('matching', $rootScope.user);
+      // this.socket.on('matched', function (data) {
+      //   $rootScope.restaurantData = data;
+      //   $rootScope.$apply(function () {
+      //     $state.go('restaurant');
+      //   });
+      // });
   };
 
   return matchFact;
