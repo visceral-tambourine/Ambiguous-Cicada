@@ -15,7 +15,7 @@ angular.module('kwiki.match', [])
         $state.go('restaurant');
       });
       // this.socket.emit('matching', $rootScope.user);
-      // this.socket.on('matched', function (data) {
+      // this.socket.on('restaurants', function (data) {
       //   $rootScope.restaurantData = data;
       //   $rootScope.$apply(function () {
       //     $state.go('restaurant');
