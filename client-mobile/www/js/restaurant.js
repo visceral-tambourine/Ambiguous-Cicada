@@ -4,17 +4,40 @@ angular.module('kwiki.restaurant', [])
 
 // new restaurant logic
 
-.factory('RestaurantFactory', [])
+.factory('RestaurantFactory', ['$state', '$rootScope', 'SocketFactory', 
+    function($state, $rootScope, SocketFactory) {
+      return {
+        postMatch: function() {
+          //this.socket = SocketFactory.connect('match');
+          console.log('user: ', $rootScope.user);
+          $state.go('chat');
+          // $rootScope.chatRoomId = 1;
+          // $rootScope.$apply(function() {
+          //   $state.go('chat');
+          // });
 
-.controller('RestaurantCtrl', ['$rootScope', '$state', '$scope',
-  function ($rootScope, $state, $scope) {
+          // this.socket.emit('matching', $rootScope.user);
+          // this.socket.on('matched', function(data) {
+          //   $rootScope.chatRoomId = data;
+          //   $rootScope.$apply(function() {
+          //     $state.go('chat');
+          //   });
+          // });
+        }
+      };
+    }
+])
+
+.controller('RestaurantCtrl', ['$rootScope', '$state', '$scope', 'RestaurantFactory',
+  function ($rootScope, $state, $scope, RestaurantFactory) {
     // this is restToClient array which is set to scope to be 
     // rendered by angular
     $scope.restaurantData = $rootScope.restaurantData;
 
 
     $scope.choose = function(restaurant) {
-      alert(restaurant.name);
+      $rootScope.user.restaurantName = restaurant.name;
+      $state.go('load');
+      RestaurantFactory.postMatch();
     };
-
-  }]);
+}]);
