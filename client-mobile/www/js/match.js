@@ -14,7 +14,10 @@ angular.module('kwiki.match', [])
       // $rootScope.$apply(function () {
       //   $state.go('restaurant');
       // });
+      
+      // sending user object to server
       this.socket.emit('matching', $rootScope.user);
+      // receiving restToClient array from server
       this.socket.on('restaurants', function (data) {
         $rootScope.restaurantData = data;
         $rootScope.$apply(function () {
@@ -31,6 +34,8 @@ angular.module('kwiki.match', [])
     $rootScope.disableButton = false;
     $scope.locationLoad;
 
+    // this browser method gives us the current user location 
+    // to send to server to be used in call to api
     $scope.getLocation = function() {
       if ('geolocation' in $window.navigator) {
         $window.navigator.geolocation.getCurrentPosition(function(position) {

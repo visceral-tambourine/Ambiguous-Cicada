@@ -8,24 +8,10 @@ angular.module('kwiki.restaurant', [])
 
 .controller('RestaurantCtrl', ['$rootScope', '$state', '$scope',
   function ($rootScope, $state, $scope) {
+    // this is restToClient array which is set to scope to be 
+    // rendered by angular
     $scope.restaurantData = $rootScope.restaurantData;
-    // $scope.restaurantData = [
-    //   {
-    //     name: 'Arbys',
-    //     rating: 3,
-    //     distance: 1
-    //   },
-    //   {
-    //     name: 'Taco Bell',
-    //     rating: 5,
-    //     distance: 2
-    //   },
-    //   {
-    //     name: 'Chipotle',
-    //     rating: 4,
-    //     distance: 3
-    //   }
-    // ];
+
 
     $scope.choose = function(restaurant) {
       alert(restaurant.name);
