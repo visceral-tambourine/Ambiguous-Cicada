@@ -24,7 +24,7 @@ var utils = require('./lib/utils');
 if ((process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV)) {
   app.use(logger('dev'));
 }
-var yelp = require('yelp');
+var yelp = require('yelp').createClient(config.yelp);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -64,7 +64,7 @@ io.of('/match').on('connection', function (socket) {
 
     var restToClient = [];
 
-    config.yelp.search(searchObj, function (error, data) {
+    yelp.search(searchObj, function (error, data) {
       var restaurants = data.businesses;
       for (var i = 0; i < restaurants.length; i++) {
         var rest = {};
