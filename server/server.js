@@ -91,7 +91,7 @@ io.of('/match').on('connection', function (socket) {
             rest.image_url = restaurants[i].image_url;
             rest.distance = coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
 
-            restToClient.push(rest);
+           restToClient.push(rest);
           }
           socket.emit('restaurants', restToClient);
         });
