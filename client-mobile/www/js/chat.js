@@ -41,7 +41,7 @@ angular.module('kwiki.chat',[])
     $scope.messages = [];
     $rootScope.disableButton = false;
     ChatFactory.leaveChat();
-    $state.go('match');
+    $state.go('restaurant');
   };
 
   $scope.loadChat = function() {
