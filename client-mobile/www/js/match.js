@@ -63,4 +63,5 @@ angular.module('kwiki.match', [])
       $scope.getLocation();
       $scope.locationLoad = false;
     }
+
 }]);
