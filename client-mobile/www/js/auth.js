@@ -69,6 +69,7 @@ angular.module('kwiki.auth', [])
       $window.localStorage.setItem('com.kwiki', JSON.stringify(res.data));
       $rootScope.user = res.data;
 
+      console.log('sending to location-load');
       $state.go('location-load');
     });
   };

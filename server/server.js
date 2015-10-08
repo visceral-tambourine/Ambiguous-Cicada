@@ -11,6 +11,9 @@ var io = require('socket.io').listen(server);
 server.listen(config.port, function () {
   console.log('Listening on: ', config.port);
 });
+var coord= require('./match/coordMatcher.js');
+var coordMatcher = new coord();
+console.log('coord:', coordMatcher._getDistance);
 
 // Internal Dependencies
 var auth = require('./auth/auth');
@@ -21,7 +24,7 @@ var utils = require('./lib/utils');
 if ((process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV)) {
   app.use(logger('dev'));
 }
-var yelp = require('yelp')
+var yelp = require('yelp').createClient(config.yelp);
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -61,7 +64,7 @@ io.of('/match').on('connection', function (socket) {
 
     var restToClient = [];
 
-    config.yelp.search(searchObj, function (error, data) {
+    yelp.search(searchObj, function (error, data) {
       var restaurants = data.businesses;
       for (var i = 0; i < restaurants.length; i++) {
         var rest = {};
@@ -69,16 +72,16 @@ io.of('/match').on('connection', function (socket) {
         rest.rating = restaurants[i].rating;
         rest.review_count = restaurants[i].review_count;
         rest.image_url = restaurants[i].image_url;
-        rest.distance = match.coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
+        rest.distance = coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
 
         restToClient.push(rest);
       }
+      socket.emit('restaurants', restToClient);
     });
-    socket.emit('restaurants', restToClient);
 
-    matchCtrl.add(user, function (chatRoomId) {
-      socket.emit('matched', chatRoomId);
-    });
+    // matchCtrl.add(user, function (chatRoomId) {
+    //   socket.emit('matched', chatRoomId);
+    // });
   });
 });
 
