@@ -14,6 +14,22 @@ coordMatcher.prototype.preMatch = function(user) {
     });
 };
 
+//something something, keep track of what restaurant the user selected
+
+//store it on the user object
+
+//add user into pool of users that have selected a restaurant
+//check to see if anyone in the pool has the same selection
+//if so, do the damn thing and match 'em
+
+//every time a user selects a restaurant, its checked against all users in the pool
+//not web scale. at some point, pools would have to be localized, so there would be a san fran pool etc etc
+//once the users are matched the underlying architecture should do the rest and get them into a room
+
+
+
+
+
 coordMatcher.prototype.match = function(users) {
   return new Promise(function (resolve, reject) {
 
