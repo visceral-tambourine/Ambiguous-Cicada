@@ -51,7 +51,7 @@ io.sockets.on('connection', function (socket) {
 // setting up sockets for different namespaces
 io.of('/match').on('connection', function (socket) {
   console.log(socket.id + "connected to /match");
-  socket.on('matching', function (user) {
+  socket.on('restaurantSearch', function (user) {
     //make api call to yelp
     //build some object of restaurants with name rating distance review count and image, iterating through the results from the api. for each result, call
     //match.coordMatcher._getDistance using the coords on user obj and coords on restaurant obj
