@@ -16,7 +16,7 @@ angular.module('kwiki.match', [])
       // });
       
       // sending user object to server
-      this.socket.emit('matching', $rootScope.user);
+      this.socket.emit('restaurantSearch', $rootScope.user);
       // receiving restToClient array from server
       this.socket.on('restaurants', function (data) {
         $rootScope.restaurantData = data;
