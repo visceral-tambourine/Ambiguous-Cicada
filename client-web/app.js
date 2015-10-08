@@ -1,7 +1,7 @@
-angular.module('kwiki', [
-  'kwiki.load',
-  'kwiki.auth',
-  'kwiki.chat',
+angular.module('paired', [
+  'paired.load',
+  'paired.auth',
+  'paired.chat',
   'ngRoute'
 ])
 

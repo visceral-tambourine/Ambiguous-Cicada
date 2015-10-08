@@ -5,13 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('kwiki', [
+angular.module('paired', [
   'ionic',
-  'kwiki.auth',
-  'kwiki.match',
-  'kwiki.socket',
-  'kwiki.chat',
-  'kwiki.restaurant'
+  'paired.auth',
+  'paired.match',
+  'paired.socket',
+  'paired.chat',
+  'paired.restaurant'
 ])
 
 .run(function($ionicPlatform, $rootScope) {

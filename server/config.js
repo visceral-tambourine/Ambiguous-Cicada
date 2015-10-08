@@ -2,7 +2,7 @@ var yelp = require('yelp');
 var config = {
 
   development: {
-    dbpath: 'mongodb://localhost/kwikidev',
+    dbpath: 'mongodb://localhost/paireddev',
     port: 3000,
     yelp: {
       consumer_key: "xMbQVJGdx8gO-GoTwNzhoQ",

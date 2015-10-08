@@ -1,12 +1,12 @@
 [![Stories in Ready](https://badge.waffle.io/Ambiguous-Cicada/Ambiguous-Cicada.png?label=ready&title=Ready)](https://waffle.io/Ambiguous-Cicada/Ambiguous-Cicada)
 
-# Kwiki
+# paired
 
-Kwiki is a mobile chat app that brings closeby users together.
+paired is a mobile chat app that brings closeby users together.
 
 Refer to our [Documentation](DOCS.md) for internal details of our app.
 
-## Original Kwiki Team
+## Original paired Team
 
   - __Product Owner__: Daniel O'Leary
   - __Scrum Master__: JT Knox

@@ -1,4 +1,4 @@
-angular.module('kwiki.chat',[])
+angular.module('paired.chat',[])
 
 .factory('ChatFactory', ['$http', '$rootScope', 'SocketFactory', '$window', function ($http, $rootScope, SocketFactory, $window) {
 
