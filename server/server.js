@@ -24,6 +24,8 @@ var utils = require('./lib/utils');
 if ((process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV)) {
   app.use(logger('dev'));
 }
+// assigning the call to the yelp api to variable yelp and invoking method
+// of yelp api and passing it the required authentication 
 var yelp = require('yelp').createClient(config.yelp);
 
 app.use(cors());
@@ -45,13 +47,11 @@ io.sockets.on('connection', function (socket) {
 });
 
 // Sockets Matching Namespace
+// setting up sockets for different namespaces
 io.of('/match').on('connection', function (socket) {
   console.log(socket.id + "connected to /match");
   socket.on('matching', function (user) {
-    //make api call to yelp
-    //build some object of restaurants with name rating distance review count and image, iterating through the results from the api. for each result, call
-    //match.coordMatcher._getDistance using the coords on user obj and coords on restaurant obj
-    //send back array of restaurants back to the client
+   // building out searchObj for yelp api to build out a url
     var searchObj = {
       term: "food",
       limit: 3,
@@ -61,10 +61,13 @@ io.of('/match').on('connection', function (socket) {
       categoryfilter: 'Restaurants',
       radius_filter: '3218'
     };
-
+    // array is going to get populated and then passed back to angular
     var restToClient = [];
 
+    // this function allows a search via yelp api
+    //  
     yelp.search(searchObj, function (error, data) {
+      //data from yelp api
       var restaurants = data.businesses;
       for (var i = 0; i < restaurants.length; i++) {
         var rest = {};
@@ -76,6 +79,7 @@ io.of('/match').on('connection', function (socket) {
 
         restToClient.push(rest);
       }
+      // once array is finished being populated emit 'restaurants' and send to client
       socket.emit('restaurants', restToClient);
     });
 
