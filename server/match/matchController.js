@@ -11,8 +11,9 @@ var lobby = new MatchModel(matcher);
 var matchController = {};
 
 matchController.add = function (user, joinChatCallback) {
+  console.log('user ' + user + ' wants to stop being lonely.');
   user.join = joinChatCallback;
-  return lobby.join(user);
+  return lobby.match(user);
 };
 
 matchController.remove = function (user) {

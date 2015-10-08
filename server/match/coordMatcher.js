@@ -6,30 +6,6 @@ var coordMatcher = function(roomSize, maxDist) {
   this.maxDist = 3;
 };
 
-coordMatcher.prototype.preMatch = function(user) {
-  return this._getCoords(user.address)
-    .then(function(coords) {
-      user.coords = coords;
-      return user;
-    });
-};
-
-//something something, keep track of what restaurant the user selected
-
-//store it on the user object
-
-//add user into pool of users that have selected a restaurant
-//check to see if anyone in the pool has the same selection
-//if so, do the damn thing and match 'em
-
-//every time a user selects a restaurant, its checked against all users in the pool
-//not web scale. at some point, pools would have to be localized, so there would be a san fran pool etc etc
-//once the users are matched the underlying architecture should do the rest and get them into a room
-
-
-
-
-
 coordMatcher.prototype.match = function(users) {
   return new Promise(function (resolve, reject) {
 
@@ -46,24 +22,6 @@ coordMatcher.prototype.match = function(users) {
   }.bind(this));
 };
 
-coordMatcher.prototype._isMatch = function(userA, userB) {
-  return this._getDistance(userA.coords, userB.coords) < this.maxDist;
-};
-
-coordMatcher.prototype._encodeAddress = function (addressString) {
-
-  //all special characters and their respective url encodings
-  var specials = {
-    " ": "%20", "#": "%23", "$": "%24", "%": "%25", "&": "%26", "@": "%40", "`": "%60", "/": "%2F", ":": "%3A",
-    ";": "%3B", "<": "%3C", "=": "%3D", ">": "%3E", "?": "%3F", "[": "%5B", "\\": "%5C", "]": "%5D", "^": "%5E",
-    "{": "%7B", "|": "%7C", "}": "%7D", "~": "%7E", "\“": "%22", "‘": "%27", "+": "%2B", ",": "%2C",
-  };
-
-  //replace all special characters in addressString with their url encodings and return the encoded string
-  return addressString.split('').map(function (char) {
-    return specials[char] || char;
-  }).join('');
-};
 
 coordMatcher.prototype._getCoords = function (addressString) {
 
