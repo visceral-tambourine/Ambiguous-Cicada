@@ -44,13 +44,10 @@ MatchModel.prototype._isDuplicate = function(user) {
 };
 
 MatchModel.prototype.match = function(user) {
-  console.log('you have reached the join: ', user.name);
   var toBeMatched = [];
   if (this.users.length > 0) {
     for (var i = 0; i < this.users.length; i++) {
-      console.log(this.users[i].restaurantName, user.restaurantName);
       if(this.users[i].restaurantName === user.restaurantName){
-        console.log('ITS A FUCKING MATCH!! FUCK!');
         toBeMatched.push(this.users[i]);
         this.leave(this.users[i]);
         toBeMatched.push(user);
@@ -58,7 +55,6 @@ MatchModel.prototype.match = function(user) {
       }
     }
   } else {
-      console.log('a user has been added to the users array');
       this.users.push(user);
   }
 };

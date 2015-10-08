@@ -6,23 +6,6 @@ var coordMatcher = function(roomSize, maxDist) {
   this.maxDist = 3;
 };
 
-coordMatcher.prototype.match = function(users) {
-  return new Promise(function (resolve, reject) {
-
-    for (var i = 0; i < users.length; i++) {
-      for (var j = i+1; j < users.length; j++) {
-
-        if(this._isMatch(users[i], users[j])){
-          resolve([ users[i], users[j] ]);
-        }
-
-      }
-    }
-
-  }.bind(this));
-};
-
-
 coordMatcher.prototype._getCoords = function (addressString) {
 
   var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + this._encodeAddress(addressString) +  "&key=" + apiKey;

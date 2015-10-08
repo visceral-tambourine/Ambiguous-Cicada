@@ -101,9 +101,7 @@ io.of('/match').on('connection', function (socket) {
       });
     });
     socket.on('matching', function (user) {
-        console.log("Its starts here.");
         matchCtrl.add(user, function (chatRoomId) {
-          console.log('Youve been MatchED!');
           socket.emit('matched', chatRoomId);
         });
 
