@@ -1,4 +1,4 @@
-angular.module('kwiki.match', [])
+angular.module('paired.match', [])
 
                                          
 .factory('MatchFactory', ['$state', 'SocketFactory', '$window', '$rootScope', 

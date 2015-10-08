@@ -1,9 +1,9 @@
-// var app = angular.module('kwiki', [
-//   'kwiki.loading',
+// var app = angular.module('paired', [
+//   'paired.loading',
 //   'ng-route'
 //   ])
 
-angular.module('kwiki.chat',['kwiki.load'])
+angular.module('paired.chat',['paired.load'])
 .factory('ChatFactory', ['$http', '$rootScope', 'SocketFactory', '$window', function ($http, $rootScope, SocketFactory, $window) {
 
   var chatFact = {};

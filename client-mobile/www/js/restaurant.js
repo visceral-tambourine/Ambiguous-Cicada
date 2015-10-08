@@ -1,4 +1,4 @@
-angular.module('kwiki.restaurant', [])
+angular.module('paired.restaurant', [])
 
 //this will be where user picks the restaurant instead
 
