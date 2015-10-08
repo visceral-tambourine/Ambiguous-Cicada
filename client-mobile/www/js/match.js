@@ -11,16 +11,16 @@ angular.module('kwiki.match', [])
 
     matchFact.postMatch = function () {
       // $rootScope.restaurantData = data;
-      $rootScope.$apply(function () {
-        $state.go('restaurant');
-      });
-      // this.socket.emit('matching', $rootScope.user);
-      // this.socket.on('restaurants', function (data) {
-      //   $rootScope.restaurantData = data;
-      //   $rootScope.$apply(function () {
-      //     $state.go('restaurant');
-      //   });
+      // $rootScope.$apply(function () {
+      //   $state.go('restaurant');
       // });
+      this.socket.emit('matching', $rootScope.user);
+      this.socket.on('restaurants', function (data) {
+        $rootScope.restaurantData = data;
+        $rootScope.$apply(function () {
+          $state.go('restaurant');
+        });
+      });
   };
 
   return matchFact;
