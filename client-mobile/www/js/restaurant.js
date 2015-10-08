@@ -8,21 +8,21 @@ angular.module('kwiki.restaurant', [])
     function($state, $rootScope, SocketFactory) {
       return {
         postMatch: function() {
-          //this.socket = SocketFactory.connect('match');
-          console.log('user: ', $rootScope.user);
-          $state.go('chat');
+          this.socket = SocketFactory.connect('match');
+          // console.log('user: ', $rootScope.user);
+          // $state.go('chat');
           // $rootScope.chatRoomId = 1;
           // $rootScope.$apply(function() {
           //   $state.go('chat');
           // });
 
-          // this.socket.emit('matching', $rootScope.user);
-          // this.socket.on('matched', function(data) {
-          //   $rootScope.chatRoomId = data;
-          //   $rootScope.$apply(function() {
-          //     $state.go('chat');
-          //   });
-          // });
+          this.socket.emit('matching', $rootScope.user);
+          this.socket.on('matched', function(data) {
+            $rootScope.chatRoomId = data;
+            $rootScope.$apply(function() {
+              $state.go('chat');
+            });
+          });
         }
       };
     }
