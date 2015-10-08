@@ -26,7 +26,7 @@ if ((process.env.NODE_ENV === 'development') || !(process.env.NODE_ENV)) {
   app.use(logger('dev'));
 }
 // assigning the call to the yelp api to variable yelp and invoking method
-// of yelp api and passing it the required authentication 
+// of yelp api and passing it the required authentication
 var yelp = require('yelp').createClient(config.yelp);
 
 app.use(cors());
@@ -51,6 +51,9 @@ io.sockets.on('connection', function (socket) {
 // setting up sockets for different namespaces
 io.of('/match').on('connection', function (socket) {
   console.log(socket.id + "connected to /match");
+
+  var userPool = {};
+
   socket.on('restaurantSearch', function (user) {
     //make api call to yelp
     //build some object of restaurants with name rating distance review count and image, iterating through the results from the api. for each result, call
@@ -67,7 +70,7 @@ io.of('/match').on('connection', function (socket) {
       categoryfilter: 'Restaurants',
       radius_filter: '3218'
     };
-   //Convert coords into an address
+    //Convert coords into an address
     https.get(url, function (res) {
       var address = '';
       res.on('data', function (data) {
@@ -91,18 +94,20 @@ io.of('/match').on('connection', function (socket) {
             rest.image_url = restaurants[i].image_url;
             rest.distance = coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
 
-           restToClient.push(rest);
+            restToClient.push(rest);
           }
           socket.emit('restaurants', restToClient);
         });
       });
     });
+    socket.on('matching', function (user) {
+        matchCtrl.add(user, function (chatRoomId) {
+          socket.emit('matched', chatRoomId);
+        });
+
+    });
 
 
-
-    // matchCtrl.add(user, function (chatRoomId) {
-    //   socket.emit('matched', chatRoomId);
-    // });
   });
 });
 

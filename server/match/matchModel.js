@@ -7,14 +7,9 @@ var MatchModel = function(matcher) {
 };
 
 MatchModel.prototype.join = function(user) {
-  return Promise.all([
-      this._add(user),
-      this._matcher.preMatch(user)
-    ])
-    .then(function() {
-      this._match();
-    }.bind(this));
-};
+      console.log("its a jobby loined good time");
+      this._match(user);
+}.bind(this);
 
 MatchModel.prototype.leave = function(user) {
   return new Promise(function(resolve, reject) {
@@ -33,8 +28,8 @@ MatchModel.prototype._add = function(user) {
     if(this._isDuplicate(user)){
       reject(new Error('User is already in the lobby'));
     }
-    this.users.unshift(user);
-    this._size++;
+    this.users.push(user);
+
     resolve(user);
   }.bind(this));
 };
@@ -48,15 +43,19 @@ MatchModel.prototype._isDuplicate = function(user) {
   return false;
 };
 
-MatchModel.prototype._match = function() {
-  if(this._size >= this._matcher.roomSize){
-    this._matcher.match(this.users)
-      .then(function (users) {
-        for (var i = 0; i < users.length; i++) {
-          this.leave(users[i]);
-        }
-        chatController.createChat(users);
-      }.bind(this));
+MatchModel.prototype.match = function(user) {
+  var toBeMatched = [];
+  if (this.users.length > 0) {
+    for (var i = 0; i < this.users.length; i++) {
+      if(this.users[i].restaurantName === user.restaurantName){
+        toBeMatched.push(this.users[i]);
+        this.leave(this.users[i]);
+        toBeMatched.push(user);
+        chatController.createChat(toBeMatched);
+      }
+    }
+  } else {
+      this.users.push(user);
   }
 };
 
