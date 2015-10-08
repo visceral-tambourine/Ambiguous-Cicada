@@ -1,5 +1,6 @@
 // Basic Server Requirements
 var config = require('./config.js');
+var https = require('https');
 var express = require('express');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
@@ -11,7 +12,7 @@ var io = require('socket.io').listen(server);
 server.listen(config.port, function () {
   console.log('Listening on: ', config.port);
 });
-var coord= require('./match/coordMatcher.js');
+var coord = require('./match/coordMatcher.js');
 var coordMatcher = new coord();
 console.log('coord:', coordMatcher._getDistance);
 
@@ -51,37 +52,53 @@ io.sockets.on('connection', function (socket) {
 io.of('/match').on('connection', function (socket) {
   console.log(socket.id + "connected to /match");
   socket.on('matching', function (user) {
-   // building out searchObj for yelp api to build out a url
+    //make api call to yelp
+    //build some object of restaurants with name rating distance review count and image, iterating through the results from the api. for each result, call
+    //match.coordMatcher._getDistance using the coords on user obj and coords on restaurant obj
+    //send back array of restaurants back to the client
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + user.location[0] + '&key=' + config.api_keys.geocoding;
+
     var searchObj = {
       term: "food",
       limit: 3,
-      location: 'San Francisco', //TODO: DON'T HARD CODE LOCATION. MAKE CALL TO GEOCODE AND CONVERT LAT/LNG TO CITY, STATE
+      location: '', //TODO: DON'T HARD CODE LOCATION. MAKE CALL TO GEOCODE AND CONVERT LAT/LNG TO CITY, STATE
       cll: user.location[0],
       sort: '0',
       categoryfilter: 'Restaurants',
       radius_filter: '3218'
     };
-    // array is going to get populated and then passed back to angular
-    var restToClient = [];
+   //Convert coords into an address
+    https.get(url, function (res) {
+      var address = '';
+      res.on('data', function (data) {
+        address += data;
+      });
+      res.on('end', function () {
+        var result = JSON.parse(address);
+        //the google gives you several variations on the address, here we're taking the most specific.
 
-    // this function allows a search via yelp api
-    //  
-    yelp.search(searchObj, function (error, data) {
-      //data from yelp api
-      var restaurants = data.businesses;
-      for (var i = 0; i < restaurants.length; i++) {
-        var rest = {};
-        rest.name = restaurants[i].name;
-        rest.rating = restaurants[i].rating;
-        rest.review_count = restaurants[i].review_count;
-        rest.image_url = restaurants[i].image_url;
-        rest.distance = coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
+        searchObj.location = result.results[0].formatted_address;
 
-        restToClient.push(rest);
-      }
-      // once array is finished being populated emit 'restaurants' and send to client
-      socket.emit('restaurants', restToClient);
+        var restToClient = [];
+
+        yelp.search(searchObj, function (error, data) {
+          var restaurants = data.businesses;
+          for (var i = 0; i < restaurants.length; i++) {
+            var rest = {};
+            rest.name = restaurants[i].name;
+            rest.rating = restaurants[i].rating;
+            rest.review_count = restaurants[i].review_count;
+            rest.image_url = restaurants[i].image_url;
+            rest.distance = coordMatcher._getDistance(user.location[1], restaurants[i].location.coordinate);
+
+           restToClient.push(rest);
+          }
+          socket.emit('restaurants', restToClient);
+        });
+      });
     });
+
+
 
     // matchCtrl.add(user, function (chatRoomId) {
     //   socket.emit('matched', chatRoomId);
