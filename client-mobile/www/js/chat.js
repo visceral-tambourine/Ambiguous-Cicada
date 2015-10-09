@@ -48,7 +48,7 @@ angular.module('paired.chat',[])
     ChatFactory.loadChat(function (message, leavechat) {
       if (leavechat) {
         $scope.messages = [];
-        $state.go('match');
+        $state.go('restaurant');
       } else {
         $scope.messages.push(message);
         $scope.$apply();
