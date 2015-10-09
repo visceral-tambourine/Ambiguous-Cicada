@@ -28,8 +28,8 @@ angular.module('paired.restaurant', [])
     }
 ])
 
-.controller('RestaurantCtrl', ['$rootScope', '$state', '$scope', 'RestaurantFactory',
-  function ($rootScope, $state, $scope, RestaurantFactory) {
+.controller('RestaurantCtrl', ['$rootScope', '$state', '$scope', '$ionicListDelegate', 'RestaurantFactory',
+  function ($rootScope, $state, $scope, $ionicListDelegate, RestaurantFactory) {
     // this is restToClient array which is set to scope to be 
     // rendered by angular
     $scope.restaurantData = $rootScope.restaurantData;
@@ -37,6 +37,7 @@ angular.module('paired.restaurant', [])
 
     $scope.choose = function(restaurant) {
       $rootScope.user.restaurantName = restaurant.name;
+      $ionicListDelegate.closeOptionButtons();
       $state.go('load');
       RestaurantFactory.postMatch();
     };
