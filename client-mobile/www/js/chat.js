@@ -32,6 +32,8 @@ angular.module('paired.chat',[])
 
   $scope.messages = [];
 
+  $roomName = $rootScope.user.restaurantName
+
   $scope.message = {
     userName: $rootScope.user.name,
     text: ''
