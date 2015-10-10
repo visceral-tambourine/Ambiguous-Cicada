@@ -10,7 +10,7 @@ Refer to our [Documentation](DOCS.md) for internal details of our app.
 
   - __Product Owner__: Aaron Norby
   - __Scrum Master__: Robert J Forloine
-  - __Development Team__: Phong Pham, Alex Hutchinson, Robert J Forloine, Aaron Norby
+  - __Development Team__: Phong Pham, Alex Hutchison, Robert J Forloine, Aaron Norby
 
 ## Table of Contents
 
