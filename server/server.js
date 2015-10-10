@@ -14,7 +14,6 @@ server.listen(config.port, function () {
 });
 var coord = require('./match/coordMatcher.js');
 var coordMatcher = new coord();
-console.log('coord:', coordMatcher._getDistance);
 
 // Internal Dependencies
 var auth = require('./auth/auth');
