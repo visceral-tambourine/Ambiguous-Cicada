@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Gotham';
+  src: url('../img/Gotham-Extra-Light.otf');
+}
+
+@font-face {
+  font-family: 'Landmark';
+  src: url('../img/Landmark-Regular.otf');
+}
+
+.hero {
+    background-image: url('../img/header.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 1200px;
+    margin-top: -20px;
+/*    position: absolute;*/
+    display: table;
+}
+
+    /*.title {
+
+        position: absolute;
+    }*/
+
+.hero h1 {
+    font-family: 'Landmark';
+    font-size: 120px;
+    color: #fff;
+    display: table-cell;
+    vertical-align: middle;
+    /*letter-spacing: 0.1em;*/
+
+}
+
+.content {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.content p {
+    font-family: 'Gotham';
+    font-size: 18px;
+    color: #999;
+    line-height: 2em;
+}
+
+.mock {
+    background-image: url('../img/6.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    height: 700px;
+    margin-top: -20px;
+    /*position: absolute;*/
+    display: table;
+    padding: 50px;
+}
+
+.mock h1 {
+    font-family: 'Landmark';
+    font-size: 72px;
+    color: #fff;
+    display: table-cell;
+    vertical-align: top;
+}
